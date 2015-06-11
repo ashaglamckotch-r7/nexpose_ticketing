@@ -128,11 +128,11 @@ module NexposeTicketing
       else
           report_config.add_filter('query', Queries.all_new_vulns(options))
       end
-      unless sites.nil? || sites.empty?
-        Array(sites).each do |site_id|
-          report_config.add_filter('site', site_id)
-        end
-      end
+      #unless sites.nil? || sites.empty?
+       # Array(sites).each do |site_id|
+        #  report_config.add_filter('site', site_id)
+        #end
+      #end
       report_config.add_filter('vuln-severity', severity)
 
       vuln_filter_cats = createVulnerabilityFilter(options)
@@ -142,10 +142,21 @@ module NexposeTicketing
         report_config.add_filter('vuln-categories', vuln_filter_cats)
       end
 
+      #if not vuln_filer_tags.nil? and not vuln_filer_tags.empty?
+       # vuln_filer_tags.map {|tag| report_config.add_filter('tag', tag.id) }
+      #end
+
+      ##### CODE CHANGE FOR ANIKET ####
       if not vuln_filer_tags.nil? and not vuln_filer_tags.empty?
         vuln_filer_tags.map {|tag| report_config.add_filter('tag', tag.id) }
       end
-
+      
+      if (vuln_filer_tags.nil? or vuln_filer_tags.empty?) and not (sites.nil? or sites.empty?)
+        Array(sites).each do |site_id|
+          report_config.add_filter('site', site_id)
+        end
+      end
+      #### END CHANGE FOR ANIKET ####
       @report_helper.save_generate_cleanup_report_config(report_config)
     end
 
@@ -170,7 +181,7 @@ module NexposeTicketing
       else
         report_config.add_filter('query', Queries.new_vulns_since_scan(site_options))
       end
-      report_config.add_filter('site', site)
+      #report_config.add_filter('site', site)
       report_config.add_filter('vuln-severity', severity)
 
       vuln_filter_cats = createVulnerabilityFilter(site_options)
@@ -180,10 +191,20 @@ module NexposeTicketing
         report_config.add_filter('vuln-categories', vuln_filter_cats)
       end
 
+      #if not vuln_filer_tags.nil? and not vuln_filer_tags.empty?
+        #vuln_filer_tags.map {|tag| report_config.add_filter('tag', tag.id) }
+      #end
+      ##### CODE CHANGE FOR ANIKET ####
       if not vuln_filer_tags.nil? and not vuln_filer_tags.empty?
         vuln_filer_tags.map {|tag| report_config.add_filter('tag', tag.id) }
       end
-
+      
+      if (vuln_filer_tags.nil? or vuln_filer_tags.empty?) and not (sites.nil? or sites.empty?)
+        Array(sites).each do |site_id|
+          report_config.add_filter('site', site_id)
+        end
+      end
+      #### END CHANGE FOR ANIKET ####
       @report_helper.save_generate_cleanup_report_config(report_config)
     end
     
@@ -204,7 +225,7 @@ module NexposeTicketing
       severity = site_options[:severity].nil? ? 0 : site_options[:severity]
       report_config.add_filter('version', '1.2.0')
       report_config.add_filter('query', Queries.old_vulns_since_scan(site_options))
-      report_config.add_filter('site', site)
+      #report_config.add_filter('site', site)
       report_config.add_filter('vuln-severity', severity)
 
       vuln_filter_cats = createVulnerabilityFilter(site_options)
@@ -214,10 +235,21 @@ module NexposeTicketing
         report_config.add_filter('vuln-categories', vuln_filter_cats)
       end
 
+      #if not vuln_filer_tags.nil? and not vuln_filer_tags.empty?
+      #  vuln_filer_tags.map {|tag| report_config.add_filter('tag', tag.id) }
+      #end
+      
+      ##### CODE CHANGE FOR ANIKET ####
       if not vuln_filer_tags.nil? and not vuln_filer_tags.empty?
         vuln_filer_tags.map {|tag| report_config.add_filter('tag', tag.id) }
       end
-
+      
+      if (vuln_filer_tags.nil? or vuln_filer_tags.empty?) and not (sites.nil? or sites.empty?)
+        Array(sites).each do |site_id|
+          report_config.add_filter('site', site_id)
+        end
+      end
+      #### END CHANGE FOR ANIKET ####
       @report_helper.save_generate_cleanup_report_config(report_config)
     end
 
@@ -242,7 +274,7 @@ module NexposeTicketing
       else
       report_config.add_filter('query', Queries.old_tickets_by_ip(site_options))
       end
-      report_config.add_filter('site', site)
+      #report_config.add_filter('site', site)
       report_config.add_filter('vuln-severity', severity)
 
       vuln_filter_cats = createVulnerabilityFilter(site_options)
@@ -252,10 +284,21 @@ module NexposeTicketing
         report_config.add_filter('vuln-categories', vuln_filter_cats)
       end
 
+      #if not vuln_filer_tags.nil? and not vuln_filer_tags.empty?
+       # vuln_filer_tags.map {|tag| report_config.add_filter('tag', tag.id) }
+      #end
+
+      ##### CODE CHANGE FOR ANIKET ####
       if not vuln_filer_tags.nil? and not vuln_filer_tags.empty?
         vuln_filer_tags.map {|tag| report_config.add_filter('tag', tag.id) }
       end
-
+      
+      if (vuln_filer_tags.nil? or vuln_filer_tags.empty?) and not (sites.nil? or sites.empty?)
+        Array(sites).each do |site_id|
+          report_config.add_filter('site', site_id)
+        end
+      end
+      #### END CHANGE FOR ANIKET ####
       @report_helper.save_generate_cleanup_report_config(report_config)
     end
 
